@@ -25,8 +25,8 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 # Expose the port that the application listens on.
-EXPOSE 3000
+EXPOSE 5173
 # Run the application.
 ENV HOSTNAME=0.0.0.0
-ENV PORT=3000
+ENV PORT=5173
 CMD ["node", "server.js"]
