@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      await api.logout();
+      sessionStorage.removeItem('token');
       setUser(null);
     } catch (error) {
       console.error('Logout failed:', error);
@@ -36,6 +36,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // Check for token in URL after OAuth redirect
+    const hash = window.location.hash;
+    if (hash.includes('token=')) {
+      const token = hash.split('token=')[1].split('&')[0];
+      sessionStorage.setItem('token', token);
+      window.location.hash = ''; // Clean URL
+    }
+
     const fetchUser = async () => {
       setLoading(true);
       await refetchUser();
