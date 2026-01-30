@@ -49,18 +49,18 @@ export default function NewPostPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Nowe ogłoszenie</h1>
+      <div className="max-w-3xl mx-auto px-4 py-12">
+        <h1 className="text-4xl font-bold mb-8">Nowe ogłoszenie</h1>
 
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg border border-gray-200 p-6">
           {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+            <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg border border-red-200">
               {error}
             </div>
           )}
 
           <div className="mb-6">
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="title" className="block text-sm font-medium mb-2">
               Tytuł
             </label>
             <input
@@ -68,14 +68,14 @@ export default function NewPostPage() {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Wprowadź tytuł ogłoszenia"
               disabled={submitting}
             />
           </div>
 
           <div className="mb-6">
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="content" className="block text-sm font-medium mb-2">
               Treść
             </label>
             <textarea
@@ -83,17 +83,17 @@ export default function NewPostPage() {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={10}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Wprowadź treść ogłoszenia"
               disabled={submitting}
             />
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <button
               type="submit"
               disabled={submitting}
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {submitting ? 'Publikowanie...' : 'Opublikuj'}
             </button>
@@ -101,7 +101,7 @@ export default function NewPostPage() {
               type="button"
               onClick={() => router.push('/')}
               disabled={submitting}
-              className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-6 py-2 rounded-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="border border-gray-200 hover:bg-gray-50 font-semibold px-6 py-2 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Anuluj
             </button>

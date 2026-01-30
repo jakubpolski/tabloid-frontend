@@ -27,7 +27,6 @@ export default function PostList() {
   }, [page]);
 
   const getAuthorName = (author: Post['author']) => {
-    console.log(author)
     if (typeof author === 'object' && author !== null) return author.name;
     return 'Unknown';
   };
@@ -46,66 +45,59 @@ export default function PostList() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Wszystkie ogłoszenia</h1>
+    <div className="max-w-4xl mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold mb-8">Wszystkie ogłoszenia</h1>
 
-      {data && data.posts.length === 0 ? (
-        <div className="text-center py-12">
+      {data?.posts.length === 0 ? (
+        <div className="text-center py-16">
           <p className="text-gray-500 text-lg">Brak ogłoszeń</p>
         </div>
       ) : (
         <>
-          <div className="space-y-4">
+          <div className="space-y-4 mb-8">
             {data?.posts.map((post) => (
               <Link
                 key={post._id}
                 href={`/post/${post._id}`}
-                className="block bg-white rounded-lg shadow-md hover:shadow-lg transition duration-200 p-6"
+                className="block bg-white border border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-md transition"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
-                      {post.title}
-                    </h2>
-                    <p className="text-gray-600 line-clamp-2 mb-4">
-                      {post.content}
-                    </p>
-                    <div className="flex items-center gap-3 text-sm text-gray-500">
-                      {typeof post.author !== 'string' && post.author.picture && (
-                        <img
-                          src={getAuthorPicture(post.author)}
-                          alt={getAuthorName(post.author)}
-                          className="w-6 h-6 rounded-full"
-                        />
-                      )}
-                      <span>{getAuthorName(post.author)}</span>
-                      <span>•</span>
-                      <span>{new Date(post.createdAt).toLocaleDateString('pl-PL')}</span>
-                    </div>
-                  </div>
+                <h2 className="text-lg font-semibold mb-2">{post.title}</h2>
+                <p className="text-gray-600 line-clamp-2 mb-4">{post.content}</p>
+                <div className="flex items-center gap-3 text-sm text-gray-500">
+                  {typeof post.author !== 'string' && post.author.picture && (
+                    <img
+                      src={getAuthorPicture(post.author)}
+                      referrerPolicy="no-referrer"
+                      alt={getAuthorName(post.author)}
+                      className="w-5 h-5 rounded-full"
+                    />
+                  )}
+                  <span>{getAuthorName(post.author)}</span>
+                  <span>•</span>
+                  <span>{new Date(post.createdAt).toLocaleDateString('pl-PL')}</span>
                 </div>
               </Link>
             ))}
           </div>
 
           {data && data.totalPages > 1 && (
-            <div className="mt-8 flex justify-center gap-2">
+            <div className="flex items-center justify-center gap-2">
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
                 Poprzednia
               </button>
 
-              <span className="px-4 py-2 bg-white border border-gray-300 rounded-lg">
-                Strona {data.currentPage} z {data.totalPages}
+              <span className="px-4 py-2 text-sm text-gray-600">
+                {data.currentPage} / {data.totalPages}
               </span>
 
               <button
                 onClick={() => setPage((p) => Math.min(data.totalPages, p + 1))}
                 disabled={page === data.totalPages}
-                className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
               >
                 Następna
               </button>

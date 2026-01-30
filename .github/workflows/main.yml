@@ -91,12 +91,12 @@ jobs:
           echo "Setting environment variables..."
           az webapp config appsettings set \
             --name $APP_NAME \
-            --resource-group ProjektPAW \
-            --settings NEXT_PUBLIC_API_URL=https://api-tabloid.azurewebsites.net
+            --resource-group ZastosowaniaInformatyki-RG \
+            --settings NEXT_PUBLIC_API_URL="https://api-tabloid.azurewebsites.net" PORT=5173
 
 
       - name: Deploy to Azure Container Instances
         uses: azure/webapps-deploy@v2
         with:
           images: jakubpolski/tabloid:prod-frontend
-          app-name: projektpaw
+          app-name: tabloid

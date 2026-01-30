@@ -91,7 +91,7 @@ export default function PostDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <div className="max-w-4xl mx-auto px-4 py-8">
-          <div className="bg-white rounded-lg shadow-md p-8 text-center">
+          <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
             <p className="text-gray-500 text-lg">Nie znaleziono ogłoszenia</p>
             <button
               onClick={() => router.push('/')}
@@ -111,19 +111,19 @@ export default function PostDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-12">
         <button
           onClick={() => router.push('/')}
-          className="mb-6 text-blue-600 hover:text-blue-800 flex items-center gap-2"
+          className="mb-6 text-blue-600 hover:text-blue-800 flex items-center gap-1"
         >
-          ← Wróć do listy
+          ← Wróć
         </button>
 
-        <div className="bg-white rounded-lg shadow-md p-8">
+        <div className="bg-white rounded-lg border border-gray-200 p-8">
           <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{post.title}</h1>
+            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-start justify-between mb-4">
               <Link
                 href={`/user/${getAuthorId(post.author)}`}
                 className="flex items-center gap-3 hover:opacity-80 transition"
@@ -136,7 +136,7 @@ export default function PostDetailPage() {
                   />
                 )}
                 <div>
-                  <p className="font-medium text-gray-900">{getAuthorName(post.author)}</p>
+                  <p className="font-medium">{getAuthorName(post.author)}</p>
                   <p className="text-sm text-gray-500">
                     {new Date(post.createdAt).toLocaleDateString('pl-PL', {
                       year: 'numeric',
@@ -153,13 +153,13 @@ export default function PostDetailPage() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => router.push(`/post/${postId}/edit`)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-200"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
                   >
                     Edytuj
                   </button>
                   <button
                     onClick={() => setShowDeleteConfirm(true)}
-                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition duration-200"
+                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
                   >
                     Usuń
                   </button>
@@ -168,32 +168,32 @@ export default function PostDetailPage() {
             </div>
           </div>
 
-          <div className="prose max-w-none">
-            <p className="text-gray-700 whitespace-pre-wrap">{post.content}</p>
+          <div className="text-gray-700 whitespace-pre-wrap">
+            {post.content}
           </div>
         </div>
 
         {showDeleteConfirm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
             <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
+              <h3 className="text-xl font-bold mb-4">
                 Potwierdź usunięcie
               </h3>
               <p className="text-gray-600 mb-6">
                 Czy na pewno chcesz usunąć to ogłoszenie? Ta operacja jest nieodwracalna.
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 <button
                   onClick={handleDelete}
                   disabled={deleting}
-                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg transition duration-200 disabled:opacity-50"
+                  className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg transition disabled:opacity-50"
                 >
                   {deleting ? 'Usuwanie...' : 'Usuń'}
                 </button>
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
                   disabled={deleting}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-4 py-2 rounded-lg transition duration-200 disabled:opacity-50"
+                  className="flex-1 border border-gray-200 hover:bg-gray-50 font-semibold px-4 py-2 rounded-lg transition disabled:opacity-50"
                 >
                   Anuluj
                 </button>

@@ -34,6 +34,7 @@ export default function Navbar() {
                 <img
                   src={user.picture}
                   alt={user.name}
+                  referrerPolicy='no-referrer'
                   className="w-8 h-8 rounded-full"
                 />
                 <span className="text-gray-700">{user.name}</span>
