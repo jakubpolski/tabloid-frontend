@@ -90,10 +90,10 @@ export default function UserDetailPage() {
   }
 
   const isAdmin = user.role === 'admin';
-  const targetRole = userData.user?.role || userData.role;
+  const targetRole = userData.user?.role ;
   const canDelete = isAdmin && targetRole !== 'admin';
-  const userName = userData.user?.name || userData.name || 'Unknown';
-  const userPicture = userData.user?.picture || userData.picture || '';
+  const userName = userData.user?.name || 'Unknown';
+  const userPicture = userData.user?.picture  || '';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -119,9 +119,6 @@ export default function UserDetailPage() {
               )}
               <div>
                 <h1 className="text-3xl font-bold">{userName}</h1>
-                {userData.user?.email && (
-                  <p className="text-gray-600 mt-1">{userData.user.email}</p>
-                )}
                 <div className="mt-2">
                   {targetRole === 'admin' && (
                     <span className="bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded">

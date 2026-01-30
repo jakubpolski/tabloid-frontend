@@ -26,16 +26,6 @@ export default function PostList() {
     fetchPosts(page);
   }, [page]);
 
-  const getAuthorName = (author: Post['author']) => {
-    if (typeof author === 'object' && author !== null) return author.name;
-    return 'Unknown';
-  };
-
-  const getAuthorPicture = (author: Post['author']) => {
-    if (typeof author === 'object' && author !== null) return author.picture;
-    return '';
-  };
-
   if (loading && !data) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -66,13 +56,13 @@ export default function PostList() {
                 <div className="flex items-center gap-3 text-sm text-gray-500">
                   {typeof post.author !== 'string' && post.author.picture && (
                     <img
-                      src={getAuthorPicture(post.author)}
+                      src={post.author.picture}
                       referrerPolicy="no-referrer"
-                      alt={getAuthorName(post.author)}
+                      alt={post.author.name}
                       className="w-5 h-5 rounded-full"
                     />
                   )}
-                  <span>{getAuthorName(post.author)}</span>
+                  <span>{post.author.name}</span>
                   <span>•</span>
                   <span>{new Date(post.createdAt).toLocaleDateString('pl-PL')}</span>
                 </div>

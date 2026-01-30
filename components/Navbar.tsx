@@ -18,7 +18,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold text-blue-600">
-            Tablica Ogłoszeń
+            Tabloid
           </Link>
 
           {user && (
@@ -47,7 +47,7 @@ export default function Navbar() {
 
               <button
                 onClick={handleLogout}
-                className="text-gray-600 hover:text-gray-900 transition duration-200"
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition"
               >
                 Wyloguj
               </button>

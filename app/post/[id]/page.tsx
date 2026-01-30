@@ -48,21 +48,6 @@ export default function PostDetailPage() {
     }
   };
 
-  const getAuthorId = (author: Post['author']) => {
-    if (typeof author === 'string') return author;
-    return author.googleId;
-  };
-
-  const getAuthorName = (author: Post['author']) => {
-    if (typeof author === 'object' && author !== null) return author.name;
-    return 'Unknown';
-  };
-
-  const getAuthorPicture = (author: Post['author']) => {
-    if (typeof author === 'object' && author !== null) return author.picture;
-    return '';
-  };
-
   if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -105,7 +90,7 @@ export default function PostDetailPage() {
     );
   }
 
-  const isAuthor = getAuthorId(post.author) === user.googleId;
+  const isAuthor = post.author.googleId === user.googleId;
   const canEdit = isAuthor || user.role === 'admin';
 
   return (
@@ -125,18 +110,18 @@ export default function PostDetailPage() {
             
             <div className="flex items-start justify-between mb-4">
               <Link
-                href={`/user/${getAuthorId(post.author)}`}
+                href={`/user/${post.author.googleId}`}
                 className="flex items-center gap-3 hover:opacity-80 transition"
               >
-                {getAuthorPicture(post.author) && (
+                {post.author.picture && (
                   <img
-                    src={getAuthorPicture(post.author)}
-                    alt={getAuthorName(post.author)}
+                    src={post.author.picture}
+                    alt={post.author.name}
                     className="w-10 h-10 rounded-full"
                   />
                 )}
                 <div>
-                  <p className="font-medium">{getAuthorName(post.author)}</p>
+                  <p className="font-medium">{post.author.name}</p>
                   <p className="text-sm text-gray-500">
                     {new Date(post.createdAt).toLocaleDateString('pl-PL', {
                       year: 'numeric',
