@@ -4,7 +4,7 @@ ARG NODE_VERSION=23.10.0
 FROM node:${NODE_VERSION}-alpine as builder
 # Needed because npm run build substitutes environemnt variables at build stage
 ARG NEXT_PUBLIC_API_URL
-ENV NEXT_PUBLIC_API_URL=NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 # Additional dependencies
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
