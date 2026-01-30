@@ -50,6 +50,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=https://api-tabloid.azurewebsites.net
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v2
@@ -91,7 +93,7 @@ jobs:
           az webapp config appsettings set \
             --name $APP_NAME \
             --resource-group ZastosowaniaInformatyki-RG \
-            --settings NEXT_PUBLIC_API_URL="https://api-tabloid.azurewebsites.net" PORT=5173
+            --settings PORT=5173
 
 
       - name: Deploy to Azure Container Instances
